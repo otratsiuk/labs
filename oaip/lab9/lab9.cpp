@@ -208,7 +208,6 @@ main() {
   int key;
   int n = 5;
   int enter = 0;
-  int *enter_ptr = &enter;
   Pupil *pupils;
   pupils = (Pupil *)malloc(n * sizeof(Pupil));
   bool process = 1;
