@@ -7,96 +7,88 @@
 using namespace std;
 void menu() {
 
-  cout << "1 - Enter array of structures"
-       << "\n";
-  cout << "2 - Display array of structures"
-       << "\n";
-  cout << "3 - Sort out array of structures"
-       << "\n";
-  cout << "4 - Search/change/delete a certain structure by a parameter"
-       << "\n";
-  cout << "5 - Escape"
-       << "\n";
+  cout << "\n1 - add new pupil\n";
+  cout << "2 - display array of structures\n";
+  cout << "3 - sort out alphabetically\n";
+  cout << "4 - search/change/delete a certain structure by a chosen field\n";
+  cout << "5 - escape\n";
 }
-
-union marks {
-  int maths, physics, russian, literature;
-};
-
-typedef enum Mark { MARK_D, MARK_C, MARK_B, MARK_A } Mark;
 
 typedef struct Pupil {
   char first_name[20];
   char last_name[20];
   char generic_name[30];
-  unsigned int phone_number : 24;
+  char phone_number[20];
   char adress[20];
   unsigned int grade : 4;
-  Mark maths_mark;
-  Mark physics_mark;
-  Mark russian_mark;
-  Mark literature_mark;
+  char maths_mark[2];
+  char physics_mark[2];
+  char russian_mark[2];
+  char literature_mark[2];
 } Schoolar;
 
 void enter_pupil(Pupil *pupils, int &enter, int &n) {
   int grade, phone;
-  cout << "Enter first name"
-       << "\n";
-  cin >> pupils[enter].first_name;
-  cout << "Enter last name"
-       << "\n";
-  cin >> pupils[enter].last_name;
-  cout << "Enter generic name"
-       << "\n";
-  cin >> pupils[enter].generic_name;
-  cout << "Enter phone number"
-       << "\n";
-  cin >> phone;
-  pupils[enter].phone_number = phone;
-  cout << "Enter adress"
-       << "\n";
-  cin >> pupils[enter].adress;
-  cout << "Enter grade"
-       << "\n";
-  cin >> grade;
+  cout << "\nenter first name: ";
+  cin.ignore(256, '\n');
+  if (cin.peek() != 32)
+    cin >> pupils[enter].first_name;
+  cout << "enter last name: ";
+  cin.ignore(256, '\n');
+  if (cin.peek() != 32)
+    cin >> pupils[enter].last_name;
+  cout << "enter generic name: ";
+  cin.ignore(256, '\n');
+  if (cin.peek() != 32)
+    cin >> pupils[enter].generic_name;
+  cout << "enter phone number: ";
+  cin.ignore(256, '\n');
+  if (cin.peek() != 32)
+    cin >> pupils[enter].phone_number;
+  cout << "enter adress: ";
+  cin.ignore(256, '\n');
+  if (cin.peek() != 32)
+    cin >> pupils[enter].adress;
+  cout << "enter grade: ";
+  cin.ignore(256, '\n');
+  if (cin.peek() != 32)
+    cin >> grade;
   pupils[enter].grade = grade;
-  cout << "Enter maths mark from 0 to 3"
-       << "\n";
-  int mark;
-  cin >> mark;
-  pupils[enter].maths_mark = (Mark)mark;
-  cout << "Enter physics mark from 0 to 3"
-       << "\n";
-  cin >> mark;
-  pupils[enter].physics_mark = (Mark)mark;
-  cout << "Enter russian mark from 0 to 3"
-       << "\n";
-  cin >> mark;
-  pupils[enter].russian_mark = (Mark)mark;
-  cout << "Enter literature mark from 0 to 3"
-       << "\n";
-  cin >> mark;
-  pupils[enter].literature_mark = (Mark)mark;
+  cout << "enter maths mark: ";
+  cin.ignore(256, '\n');
+  if (cin.peek() != 32)
+    cin >> pupils[enter].maths_mark;
+  cout << "enter physics mark: ";
+  cin.ignore(256, '\n');
+  if (cin.peek() != 32)
+    cin >> pupils[enter].physics_mark;
+  cout << "enter russian mark: ";
+  cin.ignore(256, '\n');
+  if (cin.peek() != 32)
+    cin >> pupils[enter].russian_mark;
+  cout << "enter literature mark: ";
+  cin.ignore(256, '\n');
+  if (cin.peek() != 32)
+    cin >> pupils[enter].literature_mark;
   enter++;
 }
 
 void display_pupil(Pupil *pupils, int &enter, int &i) {
   for (int i = 0; i < enter; i++) {
-    cout << "name: " << pupils[i].first_name << "\n";
-    cout << "last name: " << pupils[i].last_name << "\n";
-    cout << "generic name: " << pupils[i].generic_name << "\n";
-    cout << "phone number: " << pupils[i].phone_number << "\n";
-    cout << "adress: " << pupils[i].adress << "\n";
-    cout << "grade: " << pupils[i].grade << "\n";
-    cout << "Maths: " << pupils[i].maths_mark << "\n";
-    cout << "Physics: " << pupils[i].physics_mark << "\n";
-    cout << "Russian: " << pupils[i].russian_mark << "\n";
-    cout << "Literature: " << pupils[i].literature_mark << "\n"
-         << "\n";
+    cout << "\nname:\t\t" << pupils[i].first_name << "\n";
+    cout << "last name:\t" << pupils[i].last_name << "\n";
+    cout << "generic name:\t" << pupils[i].generic_name << "\n";
+    cout << "phone number:\t" << pupils[i].phone_number << "\n";
+    cout << "adress:\t\t" << pupils[i].adress << "\n";
+    cout << "grade:\t\t" << pupils[i].grade << "\n";
+    cout << "Maths:\t\t" << pupils[i].maths_mark << "\n";
+    cout << "Physics:\t" << pupils[i].physics_mark << "\n";
+    cout << "Russian:\t" << pupils[i].russian_mark << "\n";
+    cout << "Literature:\t" << pupils[i].literature_mark << "\n\n";
   }
 }
 
-void sort_out(Pupil *pupils, int &enter) {
+void sort_out_alphabetically(Pupil *pupils, int &enter) {
   Pupil temp;
   for (int i = 0; i < enter; i++) {
     for (int j = enter - 1; j > i; j--) {
@@ -110,42 +102,34 @@ void sort_out(Pupil *pupils, int &enter) {
 }
 
 void parameter() {
-  cout << "1 - first name"
-       << "\n";
-  cout << "2 - last name"
-       << "\n";
-  cout << "3 - grade"
-       << "\n";
+  cout << "\n1 - first name\n";
+  cout << "2 - last name\n";
+  cout << "3 - grade\n";
 }
 
-void option_menu() {
-  cout << "1 - display"
-       << "\n";
-  cout << "2 - change"
-       << "\n";
-  cout << "3 - delete"
-       << "\n";
+void display_option_menu() {
+  cout << "1 - change\n";
+  cout << "2 - remove structure\n";
 }
+
+enum Option_menu { change = 1, remove_structure };
 
 void option(Pupil *pupils, int &enter, int &index_to_change) {
+  Option_menu option_menu;
   int opt;
   int not_equal = -1;
-  cout << "choose option"
-       << "\n";
-  option_menu();
+  int condition = index_to_change + 1;
+  display_pupil(pupils, condition, index_to_change);
+  display_option_menu();
+  cout << "\nchoose option: ";
   cin >> opt;
   switch (opt) {
-  case 1: {
-    int condition = index_to_change + 1;
-    display_pupil(pupils, condition, index_to_change);
-    break;
-  }
-  case 2: {
+  case change: {
+    cout << "enter your changes, enter space to leave the field unchanged\n";
     enter_pupil(pupils, index_to_change, not_equal);
     break;
   }
-  case 3: {
-
+  case remove_structure: {
     for (int i = index_to_change; i < enter; i++) {
       pupils[i] = pupils[i + 1];
     }
@@ -159,15 +143,13 @@ void search(Pupil *pupils, int &enter) {
   char last[20];
   int grd;
   Pupil temp;
-  cout << "choose the parameter for searching"
-       << "\n";
-  int k;
   parameter();
+  cout << "\nchoose the parameter for searching: ";
+  int k;
   cin >> k;
   switch (k) {
   case 1: {
-    cout << "enter first name"
-         << "\n";
+    cout << "\nenter first name: ";
     cin >> temp.first_name;
     for (int i = 0; i < enter; i++) {
       if (strcmp(temp.first_name, pupils[i].first_name) == 0) {
@@ -178,8 +160,7 @@ void search(Pupil *pupils, int &enter) {
     break;
   }
   case 2: {
-    cout << "enter last name"
-         << "\n";
+    cout << "enter last name\n";
     cin >> temp.last_name;
     for (int i = 0; i < enter; i++) {
       if (strcmp(temp.last_name, pupils[i].last_name) == 0) {
@@ -190,8 +171,7 @@ void search(Pupil *pupils, int &enter) {
     break;
   }
   case 3: {
-    cout << "enter grade"
-         << "\n";
+    cout << "enter grade\n";
     cin >> grd;
     for (int i = 0; i < enter; i++) {
       if (grd == pupils[i].grade) {
@@ -200,6 +180,9 @@ void search(Pupil *pupils, int &enter) {
       }
     }
     break;
+  }
+  default: {
+    cout << "\nwrong parameter\n";
   }
   }
 }
@@ -216,9 +199,8 @@ main() {
       n *= 2;
       pupils = (Pupil *)realloc(pupils, n * sizeof(Pupil));
     }
-    cout << "Enter key"
-         << "\n";
     menu();
+    cout << "enter key: ";
     cin >> key;
     switch (key) {
     case 1: {
@@ -231,7 +213,9 @@ main() {
       break;
     }
     case 3: {
-      sort_out(pupils, enter);
+      int k = 0;
+      sort_out_alphabetically(pupils, enter);
+      display_pupil(pupils, enter, k);
       break;
     }
     case 4: {
@@ -240,6 +224,10 @@ main() {
     }
     case 5: {
       exit(1);
+      break;
+    }
+    default: {
+      cout << "\nwrong key\n";
       break;
     }
     }
