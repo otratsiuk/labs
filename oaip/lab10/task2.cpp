@@ -1,48 +1,43 @@
+#include <bits/stdc++.h>
 #include <iostream>
 
 using namespace std;
 
-int count_number_length(int dec) {
-  int num_length = 1;
-  int num = dec;
-  while ((num /= 10) > 0) {
-    num_length++;
-  }
-  return (num_length);
-}
-
-char *dec_to_hex(int dec) {
+string dec_to_hex(int dec) {
   static char digits[16] = {'0', '1', '2', '3', '4', '5', '6', '7',
                             '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
-  int num_length = count_number_length(dec);
-  char *temp = new char[num_length];
-  char *hex = new char[num_length];
+  int length = 1;
+  string hex;
   int num = dec;
   int rest;
-  int hex_length = 0;
+  while (num != 0) {
+    length++;
+    num /= 16;
+  }
   if (dec != 0) {
-    for (int i = 0; num != 0 && i < num_length; i++) {
-      rest = num % 16;
-      num /= 16;
-      temp[i] = digits[rest];
-      hex_length++;
+    for (int i = length - 1; dec != 0 && i >= 0; i--) {
+      rest = dec % 16;
+      dec /= 16;
+      hex.push_back(digits[rest]);
     }
-  } else if (dec == 0) {
-    hex[0] = '0';
+  } else {
+    hex.push_back('0');
   }
-  for (int i = 0; i < hex_length; i++) {
-    hex[hex_length - 1 - i] = temp[i];
-  }
-  return (hex);
+
+  // Reverse string
+  reverse(hex.begin(), hex.end());
+  return hex;
 }
 
-main() {
+int main() {
   int dec[5];
-  for (int i = 0; i < 5; i++) {
+  for (int &i : dec) {
     cout << "enter dec: ";
-    cin >> dec[i];
+    cin >> i;
     cout << "      hex: ";
-    cout << dec_to_hex(dec[i]) << "\n\n";
+    cout << dec_to_hex(i) << "\n\n";
   }
+
+  return 0;
 }
