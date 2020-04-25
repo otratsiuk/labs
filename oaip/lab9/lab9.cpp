@@ -135,10 +135,6 @@ void option(Pupil *pupils, int &enter, int &index_to_change) {
     }
     enter--;
   }
-  default: {
-    cout << "\nwrong key\n";
-    break;
-  }
   }
 }
 
@@ -187,6 +183,7 @@ void search(Pupil *pupils, int &enter) {
   }
   default: {
     cout << "\nwrong parameter\n";
+    break;
   }
   }
 }

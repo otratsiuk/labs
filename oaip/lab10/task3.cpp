@@ -19,13 +19,21 @@ main() {
   int n;
   int k[5];
   int c;
-  cout << "enter n: ";
+  cout << "enter n(n > 0): ";
   cin >> n;
+  while (n <= 0) {
+    cout << "wrong input, enter n(n > 0) again\n";
+    cin >> n;
+  }
   for (int i = 0; i < 5; i++) {
-    cout << "enter k: ";
+    cout << "enter k(0 <= k <= n): ";
     cin >> k[i];
+    while (k[i] < 0 || k[i] > n) {
+      cout << "wrong input, enter n(n > 0) again\n";
+      cin >> k[i];
+    }
     c = combin1(n, k[i]);
-    cout << "      c: " << c << "\n";
+    cout << "c: " << c << "\n";
     cout << "function call counter: " << fuction_call_counter << "\n";
     fuction_call_counter = 0;
   }
