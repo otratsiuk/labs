@@ -8,7 +8,7 @@ using namespace std;
 
 struct Book {
   char title[60];
-  char authorName[40];
+  char author_name[40];
   unsigned int year : 32;
   char publisher[20];
   unsigned int cost : 32;
@@ -26,7 +26,7 @@ void AddBook(vector<Book> &books) {
   cout << "\nEnter title: ";
   cin.getline(book.title, 30);
   cout << "\nEnter author: ";
-  cin.getline(book.authorName, 20);
+  cin.getline(book.author_name, 20);
   cout << "\nEnter year: ";
   cin >> year;
   book.year = year;
@@ -47,7 +47,7 @@ void AddBook(vector<Book> &books) {
 
 void DisplayBook(Book &book) {
   cout << "\ntitle:\t\t" << book.title << "\n";
-  cout << "author:\t\t" << book.authorName << "\n";
+  cout << "author:\t\t" << book.author_name << "\n";
   cout << "year:\t\t" << book.year << "\n";
   cout << "publisher:\t" << book.publisher << "\n";
   cout << "cost:\t\t" << book.cost << "\n";
@@ -55,23 +55,23 @@ void DisplayBook(Book &book) {
   cout << "profit:\t\t" << book.profit << "\n\n";
 }
 
-void FromFileToVector(vector<Book> &books, string &fileName) {
-  ifstream booksFile(fileName, ios ::out);
-  Book tempBook;
+void FromFileToVector(vector<Book> &books, string &file_name) {
+  ifstream books_file(file_name, ios ::out);
+  Book temp_book;
   books.clear();
-  booksFile.seekg(0, ios::beg);
-  while (booksFile.read((char *)&tempBook, sizeof(Book))) {
-    books.push_back(tempBook);
+  books_file.seekg(0, ios::beg);
+  while (books_file.read((char *)&temp_book, sizeof(Book))) {
+    books.push_back(temp_book);
   }
-  booksFile.close();
+  books_file.close();
 }
 
-void FromVectorToFile(vector<Book> books, string &fileName) {
-  ofstream booksFile(fileName, ios ::in | ios::trunc);
+void FromVectorToFile(vector<Book> books, string &file_name) {
+  ofstream books_file(file_name, ios ::in | ios::trunc);
   for (int i = 0; i < books.size(); i++) {
-    booksFile.write((char *)&books[i], sizeof(Book));
+    books_file.write((char *)&books[i], sizeof(Book));
   }
-  booksFile.close();
+  books_file.close();
 }
 
 void DisplayBooksVector(vector<Book> &books) {
@@ -98,7 +98,7 @@ void SelectionSort(vector<Book> &books) {
       if (key == 1 && (strcmp(books[j].title, books[min].title)) < 0) {
         min = j;
       } else if (key == 2 &&
-                 (strcmp(books[j].authorName, books[min].authorName)) < 0) {
+                 (strcmp(books[j].author_name, books[min].author_name)) < 0) {
         min = j;
       } else if (key == 3 && (books[j].year < books[min].year)) {
         min = j;
@@ -132,7 +132,7 @@ int SearchByParameter(vector<Book> &books) {
     cin.ignore(256, '\n');
     cin.getline(parameter1, 30);
     for (int i = 0; i < books.size(); i++) {
-      if (strcmp(parameter1, books[i].authorName) == 0) {
+      if (strcmp(parameter1, books[i].author_name) == 0) {
         return i;
       }
     }
@@ -163,13 +163,13 @@ void Menu() {
 
 int main() {
   vector<Book> books;
-  string booksFileName("books.bin");
-  fstream booksFile(booksFileName);
+  string books_file_name("books.bin");
+  fstream books_file(books_file_name);
 
   void (*options[4])(vector<Book> & books) = {AddBook, DisplayBooksVector,
                                               SelectionSort, DeleteElement};
 
-  FromFileToVector(books, booksFileName);
+  FromFileToVector(books, books_file_name);
 
   int next = 1;
   while (next) {
@@ -184,6 +184,6 @@ int main() {
     }
   }
 
-  FromVectorToFile(books, booksFileName);
+  FromVectorToFile(books, books_file_name);
   return 0;
 }
