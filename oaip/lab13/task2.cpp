@@ -113,15 +113,16 @@ void SelectionSort(vector<Book> &books) {
 
 int SearchByParameter(vector<Book> &books) {
   int key;
-  char parameter1[30];
-  int parameter2;
+  char parameter1[60];
+  char parameter2[40];
+  int parameter3;
   cout << "\nChoose parameter for searching:\n";
   Keys();
   cin >> key;
   if (key == 1) {
     cout << "Enter parameter:\n";
     cin.ignore(256, '\n');
-    cin.getline(parameter1, 30);
+    cin.getline(parameter1, 60);
     for (int i = 0; i < books.size(); i++) {
       if (strcmp(parameter1, books[i].title) == 0) {
         return i;
@@ -130,27 +131,31 @@ int SearchByParameter(vector<Book> &books) {
   } else if (key == 2) {
     cout << "Enter parameter:\n";
     cin.ignore(256, '\n');
-    cin.getline(parameter1, 30);
+    cin.getline(parameter2, 40);
     for (int i = 0; i < books.size(); i++) {
-      if (strcmp(parameter1, books[i].author_name) == 0) {
+      if (strcmp(parameter2, books[i].author_name) == 0) {
         return i;
       }
     }
   } else if (key == 3) {
     cout << "Enter parameter:\n";
-    cin >> parameter2;
+    cin >> parameter3;
     for (int i = 0; i < books.size(); i++) {
-      if (parameter2 == books[i].year) {
+      if (parameter3 == books[i].year) {
         return i;
       }
     }
   }
+  return -1;
 }
 
 void DeleteElement(vector<Book> &books) {
   int index = SearchByParameter(books);
-  books.erase(books.begin() + index);
-  cout << "Book is deleted\n";
+  if (index != -1) {
+    books.erase(books.begin() + index);
+    cout << "Book is deleted\n";
+  } else
+    cout << "Book is not found\n";
 }
 
 void Menu() {
