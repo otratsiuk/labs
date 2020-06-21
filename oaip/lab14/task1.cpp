@@ -1,4 +1,4 @@
-#include <assert.h>
+#include <cassert>
 #include <functional>
 #include <iostream>
 
@@ -103,7 +103,7 @@ void TreeDisplay(Node *node, int depth = 0) {
 
 int main() {
   auto tree =
-      new Node{1, new Node{2, new Node{7}, new Node{42}},
+      new Node{1, new Node{2000, new Node{7}, new Node{42}},
                new Node{3, new Node{16, new Node{25, new Node{-9000}}}}};
 
   std::cout << "Original tree:" << std::endl;
