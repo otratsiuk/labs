@@ -115,12 +115,15 @@ void ListDelete(List *list, ListEntry *prev, ListEntry *current) {
 
 void ListDeleteNegative(List *list) {
   assert(list);
+
   auto current = list->head;
   ListEntry *prev = NULL;
+
   while (current != NULL) {
     if (current->value < 0) {
       ListDelete(list, prev, current);
     }
+
     prev = current;
     current = current->next;
   }
