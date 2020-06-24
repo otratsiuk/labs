@@ -103,16 +103,6 @@ void ListAddNeighbours(List *list) {
   ListTransform(list, [](auto _, auto prev, auto next) { return prev + next; });
 }
 
-void ListDisplayy(List *list) {
-  assert(list);
-
-  auto entry = list->head;
-  while (entry != NULL) {
-    std ::cout << entry->value;
-    entry = entry->next;
-  }
-}
-
 void ListDelete(List *list, ListEntry *prev, ListEntry *current) {
   if (current == list->head) {
     current->next = list->head;
