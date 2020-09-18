@@ -7,6 +7,7 @@ public:
   char genre[64];
   int duration;
 
+public:
   Movie() : title("unknown"), genre("unknown"), duration(0) {}
 
   Movie(const char title_input[], const char genre_input[]) {
@@ -23,7 +24,7 @@ public:
     std::cin.getline(genre, 64);
     std::cout << "Enter duration in min: ";
     std::cin >> duration;
-    std::cin.getline(title, 64);
+    std::cin.get();
   }
 
   void show_movie_features() {
@@ -60,7 +61,7 @@ private:
 public:
   Route() : kilometers(0), meters(0.0), minutes(0) {}
 
-  Route(int km, float m) : kilometers(km), meters(m) {}
+  Route(int km, float m, int min) : kilometers(km), meters(m), minutes(min) {}
 
   Route(int min) : minutes(min) {}
 
@@ -78,13 +79,29 @@ public:
     std::cout << "Meters: " << meters << "\n";
     std::cout << "Minutes: " << minutes << "\n";
   }
+
+  void operator=(Route route2) {
+    kilometers = route2.kilometers;
+    meters = route2.meters;
+    minutes = route2.meters;
+  }
+
+  Route operator+(Route route2) {
+    int km = kilometers + route2.kilometers;
+    float m = meters + route2.meters;
+    int min = minutes + route2.minutes;
+
+    return Route(km, m, min);
+  }
+
+  Route operator++(int) { return Route(minutes++); }
 };
 
 int main() {
   // Task1
   Movie movie;
   std::cout << "Task 1\n";
-  std::cout << "default constructor:\n";
+  std::cout << "constructor without parameters:\n";
   movie.show_movie_features();
 
   Movie movie1("The Hobbit", "fantasy");
@@ -116,6 +133,39 @@ int main() {
   std::cout << movie1.duration << "\n";
 
   // Task2
+  Route route;
+  std::cout << "\nTask 2\n";
+  std::cout << "constructor without parameters:\n";
+  route.show_route_parameters();
+
+  Route route1(15, 68.45, 20);
+  std::cout << "\nconstructor with 3 parameters(km, m, min):\n";
+  route1.show_route_parameters();
+
+  Route route2(15);
+  std::cout << "\nconstructor with time parameter:\n";
+  route2.show_route_parameters();
+
+  std::cout << "set & show methods:\n";
+  route2.set_route_parameters();
+  route2.show_route_parameters();
+
+  std::cout
+      << "\noverloaded operator =, assigns values of one route to another:\n";
+  route1 = route2;
+  std::cout << "route1:\n";
+  route1.show_route_parameters();
+  std::cout << "\nroute2:\n";
+  route2.show_route_parameters();
+
+  std::cout << "\noverloaded operator +, sums values and returns a new temp "
+               "object of the class with the result values\n";
+  route = route1 + route2;
+  route.show_route_parameters();
+
+  std::cout << "overloaded operator ++, increments route time\n";
+  route++;
+  route.show_route_parameters();
 
   return 0;
 }
