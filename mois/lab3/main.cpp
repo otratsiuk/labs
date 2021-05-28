@@ -10,7 +10,7 @@ int main(int argc, char *argv[]){
     std::cout<<"Tree1:\n";
     Tree1.display(Tree1.getRoot(), 0);
     std::cout<<"Tree2:\n";
-    Tree2.display(Tree1.getRoot(), 0);
+    Tree2.display(Tree2.getRoot(), 0);
 
     bool isomorphism = isIsomorphic(Tree1.getRoot(), Tree2.getRoot());
 

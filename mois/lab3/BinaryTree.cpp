@@ -85,12 +85,14 @@ bool isIsomorphic(Tree::Node *root1, Tree::Node *root2){
     return true;
   
  // Exactly one of the root1 and root2 is null, trees not isomorphic
- if (root1 == nullptr || root2 == nullptr)
+ if (root1 == nullptr || root2 == nullptr){
     return false;
+ }
   
- if (root1->value != root2->value)
+ if (root1->value != root2->value){
     return false;
-  
+ }   
+ 
     return 
  (isIsomorphic(root1->left,root2->left) && isIsomorphic(root1->right,root2->right))||
  (isIsomorphic(root1->left,root2->right) && isIsomorphic(root1->right,root2->left));
